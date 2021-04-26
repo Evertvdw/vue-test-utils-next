@@ -3,6 +3,7 @@ import { h } from 'vue'
 import { Options, Vue } from 'vue-class-component'
 import { mount } from '../../src'
 import ClassComponent from '../components/ClassComponent.vue'
+import ClassComponentWithMixin from '../components/ClassComponentWithMixin.vue'
 
 describe('class component', () => {
   it('minimal class component', () => {
@@ -104,5 +105,10 @@ describe('class component', () => {
     expect(wrapper.get('[data-props]').text()).toBe('Props Message')
     await wrapper.get('button').trigger('click')
     expect(wrapper.get('[data-methods]').text()).toBe('Updated')
+  })
+
+  it('works when using a mixin with SFC', () => {
+    const wrapper = mount(ClassComponentWithMixin, {})
+    expect(wrapper.get('[data-mixin]').text()).toBe('Hello world!')
   })
 })
