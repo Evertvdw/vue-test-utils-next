@@ -1,9 +1,10 @@
 import 'reflect-metadata'
 import { h } from 'vue'
-import { Options, Vue } from 'vue-class-component'
+import { mixins, Options, Vue } from 'vue-class-component'
 import { mount } from '../../src'
 import ClassComponent from '../components/ClassComponent.vue'
 import ClassComponentWithMixin from '../components/ClassComponentWithMixin.vue'
+import ClassComponentWithMixinOptions from '../components/ClassComponentWithMixinOptions.vue'
 
 describe('class component', () => {
   it('minimal class component', () => {
@@ -94,6 +95,21 @@ describe('class component', () => {
     expect(wrapper.vm.b).toBe(3)
   })
 
+  it('mixins with render function', () => {
+    class MyMixin extends Vue {
+      message = 'Hello world!'
+    }
+
+    class MyComp extends mixins(MyMixin) {
+      render() {
+        return h('div', this.message)
+      }
+    }
+
+    const wrapper = mount(MyComp)
+    expect(wrapper.text()).toBe('Hello world!')
+  })
+
   it('works with shallow mount and SFC', async () => {
     const wrapper = mount(ClassComponent, {
       props: {
@@ -109,6 +125,13 @@ describe('class component', () => {
 
   it('works when using a mixin with SFC', () => {
     const wrapper = mount(ClassComponentWithMixin, {})
+    console.log(wrapper.html())
+    expect(wrapper.get('[data-mixin]').text()).toBe('Hello world!')
+  })
+
+  it('works when using a mixin with SFC using @Options mixins', () => {
+    const wrapper = mount(ClassComponentWithMixinOptions, {})
+    console.log(wrapper.html())
     expect(wrapper.get('[data-mixin]').text()).toBe('Hello world!')
   })
 })
