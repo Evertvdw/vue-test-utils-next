@@ -3,6 +3,7 @@ import { h } from 'vue'
 import { mixins, Options, Vue } from 'vue-class-component'
 import { mount } from '../../src'
 import ClassComponent from '../components/ClassComponent.vue'
+import ClassComponentProperty from '../components/ClassComponentProperty.vue'
 import ClassComponentWithMixin from '../components/ClassComponentWithMixin.vue'
 import ClassComponentWithMixinOptions from '../components/ClassComponentWithMixinOptions.vue'
 
@@ -121,6 +122,13 @@ describe('class component', () => {
     expect(wrapper.get('[data-props]').text()).toBe('Props Message')
     await wrapper.get('button').trigger('click')
     expect(wrapper.get('[data-methods]').text()).toBe('Updated')
+  })
+
+  it('works with shallow mount and SFC imported from vue-property-decorator', async () => {
+    const wrapper = mount(ClassComponentProperty, {
+      shallow: true
+    })
+    expect(wrapper.get('[data-computed]').text()).toBe('Message: Hello')
   })
 
   it('works when using a mixin with SFC', () => {
