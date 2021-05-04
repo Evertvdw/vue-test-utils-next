@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { mixins } from 'vue-class-component'
-import ClassMixin from './ClassMixin.vue'
+import ClassMixin from './ClassMixin'
 
 export default class ClassComponent extends mixins(ClassMixin) {}
 </script>

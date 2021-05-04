@@ -1,5 +1,4 @@
-<script lang="ts">
-import { Vue, Options } from 'vue-class-component'
+import { Vue } from 'vue-class-component'
 
 export default class ClassMixin extends Vue {
   message = 'Hello world!'
@@ -8,4 +7,3 @@ export default class ClassMixin extends Vue {
     console.log('ClassMixin created!')
   }
 }
-</script>

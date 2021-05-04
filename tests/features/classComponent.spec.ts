@@ -5,7 +5,6 @@ import { mount } from '../../src'
 import ClassComponent from '../components/ClassComponent.vue'
 import ClassComponentProperty from '../components/ClassComponentProperty.vue'
 import ClassComponentWithMixin from '../components/ClassComponentWithMixin.vue'
-import ClassComponentWithMixinOptions from '../components/ClassComponentWithMixinOptions.vue'
 
 describe('class component', () => {
   it('minimal class component', () => {
@@ -133,13 +132,6 @@ describe('class component', () => {
 
   it('works when using a mixin with SFC', () => {
     const wrapper = mount(ClassComponentWithMixin, {})
-    console.log(wrapper.html())
-    expect(wrapper.get('[data-mixin]').text()).toBe('Hello world!')
-  })
-
-  it('works when using a mixin with SFC using @Options mixins', () => {
-    const wrapper = mount(ClassComponentWithMixinOptions, {})
-    console.log(wrapper.html())
     expect(wrapper.get('[data-mixin]').text()).toBe('Hello world!')
   })
 })
